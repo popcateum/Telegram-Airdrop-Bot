@@ -87,19 +87,19 @@ def handle_text(message):
             cursor.execute(sql, message.chat.id)
         if message.chat.id in airdrop_users:
             bot.send_message(message.chat.id, config.texts['start_2'].format(
-                message.from_user.first_name) + "[» Source Code](https://github.com/vsnz/Telegram-Airdrop-Bot).",
+                message.from_user.first_name) + "[» Popcateum Everywhere!](https://popcateum.org).",
                              parse_mode='Markdown', disable_web_page_preview=True, reply_markup=airdropkeyboard)
         elif not config.airdrop_live:
             bot.send_message(message.chat.id, config.texts[
-                'airdrop_start'] + "[» Source Code](https://github.com/vsnz/Telegram-Airdrop-Bot).",
+                'airdrop_start'] + "[» Popcateum Everywhere!](https://popcateum.org).",
                              parse_mode='Markdown', disable_web_page_preview=True)
         elif len(airdrop_users) >= config.airdrop_cap:
             bot.send_message(message.chat.id, config.texts[
-                'airdrop_max_cap'] + "[» Source Code](https://github.com/vsnz/Telegram-Airdrop-Bot).",
+                'airdrop_max_cap'] + "[» Popcateum Everywhere!](https://popcateum.org).",
                              parse_mode='Markdown', disable_web_page_preview=True)
         else:
             bot.send_message(message.chat.id, config.texts['start_1'].format(
-                message.from_user.first_name) + "[» Source Code](https://github.com/vsnz/Telegram-Airdrop-Bot).",
+                message.from_user.first_name) + "[» Popcateum Everywhere!](https://popcateum.org).",
                              parse_mode='Markdown', disable_web_page_preview=True, reply_markup=defaultkeyboard)
 
 
@@ -137,7 +137,7 @@ def handle_text(message):
         cursor.execute(sql, message.chat.id)
         data = cursor.fetchall()
         bot.send_message(message.chat.id,
-                         text='Your tokens will be sent to:\n\n[{0}](https://etherscan.io/address/{0})'.format(
+                         text='Your tokens will be sent to:\n\n[{0}](https://explorer.popcateum.org/address/{0})'.format(
                              data[0]['address']), parse_mode='Markdown', disable_web_page_preview=True)
 
 
@@ -162,7 +162,7 @@ def address_check(message):
             try:
                 bot.send_message(config.log_channel, "🎈 *#Airdrop_Entry ({0}):*\n"
                                                      " • User: [{1}](tg://user?id={2}) (#id{2})\n"
-                                                     " • Address: [{3}](https://etherscan.io/address/{3})\n"
+                                                     " • Address: [{3}](https://explorer.popcateum.org/address/{3})\n"
                                                      " • Time: `{4} UTC`".format(len(airdrop_users), bot.get_chat(
                     message.chat.id).first_name, message.chat.id, message.text, strftime("%Y-%m-%d %H:%M:%S",
                                                                                          gmtime())),
@@ -170,7 +170,7 @@ def address_check(message):
             except:
                 pass
         else:
-            msg = bot.reply_to(message, '❌ Invalid $ETH address. Try again:', parse_mode='Markdown',
+            msg = bot.reply_to(message, '❌ Invalid $POP address. Try again:', parse_mode='Markdown',
                                reply_markup=cancel_button())
             bot.register_next_step_handler(msg, address_check)
 
